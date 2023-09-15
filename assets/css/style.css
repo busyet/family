@@ -160,7 +160,7 @@ h1, h2, h3, h4, h5, h6 {
 .nav-menu a, .nav-menu a:focus {
   display: flex;
   align-items: center;
-  color: #45505b;
+  color: #455b4d;
   padding: 10px 18px;
   margin-bottom: 8px;
   transition: 0.3s;
@@ -222,7 +222,7 @@ h1, h2, h3, h4, h5, h6 {
   padding: 5px;
 }
 .mobile-nav-toggle i {
-  color: #45505b;
+  color: #f50a12;
 }
 
 .mobile-nav-active {
@@ -253,7 +253,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 #hero:before {
   content: "";
-  background: rgba(81, 3, 3, 0.447);
+  background: rgba(231, 5, 5, 0.366);
   position: absolute;
   bottom: 0;
   top: 0;
