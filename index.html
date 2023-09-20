@@ -26,7 +26,7 @@
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
-
+  <script async src="https://www.tiktok.com/embed.js"></script>
 
 </head>
 
@@ -638,12 +638,12 @@
           </div>
 
           <div id="music" class="col-sm-3 mt-5 mt-lg-0 d-flex align-items-stretch">
-            <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/1449ZR2DLKuyAi8RJ9yuGc?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/1449ZR2DLKuyAi8RJ9yuGc?utm_source=generator" width="100%" height="750" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
             
           </div>
           
           <div class="col-sm-3 mt-5 mt-lg-0 d-flex align-items-stretch">
-            <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/6U3VneFx3fx4u6hMI78GjR?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/6U3VneFx3fx4u6hMI78GjR?utm_source=generator" width="100%" height="750" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
             
             
           </div>
@@ -685,8 +685,38 @@
   <script src="assets/js/main.js"></script>
 
   <!-- tiktok API -->
-  <script async src="https://www.tiktok.com/embed.js"></script>
+  <script>
 
+  
+  // Authorization token that must have been created previously. See : https://developer.spotify.com/documentation/web-api/concepts/authorization
+  const token = 'BQCKmYwVS50Pjp6pF9R7qTKARTFU4ep5auoPhRpO4Zq3vFynR8BZQP8lANt40HiutJsdgaH2RG-WhS9xGSHGg7WlNTQodzJ5GopireT4r0CBOgFe1qmY9nisKAhvngpH4bCLeioSo2ptiz4bDaye7dogsBX_-wWOqLi7ttrlf4H0Oo15hyEfsUVLmU1jrf_Xyt277tIdz_In5thxkpC_6Yf4ptRNzUOPqcibsL-GOhbXWeXq0gF1vSNie9bxzb3S64xeKU9ix3Lkn5toM0l-v74j';
+  async function fetchWebApi(endpoint, method, body) {
+    const res = await fetch(`https://api.spotify.com/${endpoint}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      method,
+      body:JSON.stringify(body)
+    });
+    return await res.json();
+  }
+  
+  async function getTopTracks(){
+    // Endpoint reference : https://developer.spotify.com/documentation/web-api/reference/get-users-top-artists-and-tracks
+    return (await fetchWebApi(
+      'v1/me/top/tracks?time_range=short_term&limit=5', 'GET'
+    )).items;
+  }
+  
+  const topTracks = await getTopTracks();
+  console.log(
+    topTracks?.map(
+      ({name, artists}) =>
+        `${name} by ${artists.map(artist => artist.name).join(', ')}`
+    )
+  );
+
+</script>
 </body>
 
 </html>
